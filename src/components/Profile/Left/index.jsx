@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Avatar } from "./Avatar";
+import { Avatar } from './Avatar';
 
-import "./styles.css";
+import './styles.css';
 
-export const Left = ({ src }) => (
-  <div className="profile__left">
-    <Avatar src={src}/>
+export const Left = ({ src, onClick }) => (
+  <div className="profile__left" onClick={onClick}>
+    <Avatar src={src} />
   </div>
 );
