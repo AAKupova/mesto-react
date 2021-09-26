@@ -6,10 +6,10 @@ import { Text } from "./Text";
 
 import "./styles.css";
 
-export const Center = ({ title, text }) => (
+export const Center = ({ title, text, onEditProfil }) => (
   <div className="profile__center">
     <Title title={title} />
-    <Button />
+    <Button onClick={onEditProfil}/>
     <Text text={text} />
   </div>
 );

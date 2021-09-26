@@ -6,10 +6,10 @@ import { Center } from "./Center";
 
 import "./styles.css";
 
-export const Profile = ({ avatar, text, title }) => (
+export const Profile = ({ avatar, text, title, onOpen, onCardAdd, onEditProfil, onChangeAvatar }) => (
   <section className="profile">
-    <Left src={avatar} />
-    <Center title={title} text={text} />
-    <Right />
+    <Left src={avatar} onClick={onChangeAvatar}/>
+    <Center title={title} text={text} onEditProfil={onEditProfil} />
+    <Right onCardAdd={onCardAdd} />
   </section>
 );

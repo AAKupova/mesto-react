@@ -4,8 +4,8 @@ import { Button } from "./Button";
 
 import "./styles.css";
 
-export const Right = () => (
+export const Right = ({ onCardAdd }) => (
   <div className="profile__right">
-    <Button />
+    <Button onClick={onCardAdd} />
   </div>
 );

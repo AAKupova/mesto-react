@@ -19,8 +19,12 @@ export const Card = ({
   isMyLike,
   onDelete,
   onLike,
+  onOpenPopup,
+  onConfirm,
+  
 }) => {
   const handlerDelete = () => {
+    onConfirm();
     onDelete(id);
   };
 
@@ -28,10 +32,14 @@ export const Card = ({
     onLike(id);
   };
 
+  const hendlerOpenPreview = () => {
+    onOpenPopup({ src: img, alt: title });
+  };
+
   return (
     <li className="card">
       {isMy && <Delete onClick={handlerDelete} />}
-      <Image src={img} alt={title} />
+      <Image src={img} alt={title} onOpenPopup={hendlerOpenPreview} />
       <Footer>
         <Title>{title}</Title>
         <ContainerLike>
