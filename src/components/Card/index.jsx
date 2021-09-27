@@ -1,14 +1,14 @@
-import React from "react";
+import { React } from 'react';
 
-import { ContainerLike } from "./ContainerLike";
-import { Delete } from "./Delete";
-import { Footer } from "./Footer";
-import { Image } from "./Image";
-import { Like } from "./Like";
-import { LikeCounter } from "./LikeCounter";
-import { Title } from "./Title";
+import { ContainerLike } from './ContainerLike';
+import { Delete } from './Delete';
+import { Footer } from './Footer';
+import { Image } from './Image';
+import { Like } from './Like';
+import { LikeCounter } from './LikeCounter';
+import { Title } from './Title';
 
-import "./styles.css";
+import './styles.css';
 
 export const Card = ({
   id,
@@ -21,11 +21,9 @@ export const Card = ({
   onLike,
   onOpenPopup,
   onConfirm,
-  
 }) => {
-  const handlerDelete = () => {
-    onConfirm();
-    onDelete(id);
+  const handlerDelete = (e) => {
+    onConfirm(id, e);
   };
 
   const handlerLike = () => {

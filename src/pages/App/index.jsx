@@ -27,13 +27,13 @@ import { dataConfirm } from '../../utils/constants';
 import './styles.css';
 
 export const App = () => {
-  const { cards, user, handlerCardDelete, handlerCardLike } =
-    useNormalizeData();
+  const { cards, user, handlerCardDelete, handlerCardLike, handlerAddCard, handlerEdit, handlerChangePhoto } = useNormalizeData();
   const { previewData, handlerTogglePreview } = usePreviewPopup();
-  const { showPopupAdd, handlerTogglePopupAdd, handlerSubmit} = useAddPopup();
-  const { showEditProfil, handlerToggleEditProfil, handlerEditSubmit} = useEditProfil();
-  const { showChangeAvatar, handlerToggleChange, handlerChangeSubmit} = useChangeAvatar();
-  const { showConfirm, handlerToggleConfirm, handlerConfirmSubmit} = useConfirm();
+  const { showPopupAdd, handlerTogglePopupAdd, handlerSubmit } = useAddPopup({ handlerAddCard });
+  const { showEditProfil, handlerToggleEditProfil, handlerEditSubmit } = useEditProfil({ handlerEdit });
+  const { showChangeAvatar, handlerToggleChange, handlerChangeSubmit } = useChangeAvatar({ handlerChangePhoto });
+  const { showConfirm, handlerToggleConfirm, handlerConfirmSubmit } = useConfirm({ handlerCardDelete });
+
   return (
     <div className="page">
       <Header>
@@ -80,7 +80,7 @@ export const App = () => {
         <Form data={dataChangeAvatar} onSubmit={handlerChangeSubmit} />
       </Popup>
       <Popup show={showConfirm} onclose={handlerToggleConfirm}>
-        <PopupConfirm data={dataConfirm} onClick={handlerConfirmSubmit}/>
+        <PopupConfirm data={dataConfirm} onClick={handlerConfirmSubmit} />
       </Popup>
     </div>
   );

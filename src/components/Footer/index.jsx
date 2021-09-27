@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { Text } from './Text'
+import { Text } from './Text';
 
-import "./styles.css";
+import './styles.css';
 
 export const Footer = () => (
   <footer className="footer">

@@ -1,15 +1,22 @@
-import React from "react";
+import React from 'react';
 
-import { Left } from "./Left";
-import { Right } from "./Right";
-import { Center } from "./Center";
+import { BlockLeft } from './BlockLeft';
+import { BlockRight } from './BlockRight';
+import { BlockCenter } from './BlockCenter';
 
-import "./styles.css";
+import './styles.css';
 
-export const Profile = ({ avatar, text, title, onOpen, onCardAdd, onEditProfil, onChangeAvatar }) => (
+export const Profile = ({
+  avatar,
+  text,
+  title,
+  onCardAdd,
+  onEditProfil,
+  onChangeAvatar,
+}) => (
   <section className="profile">
-    <Left src={avatar} onClick={onChangeAvatar}/>
-    <Center title={title} text={text} onEditProfil={onEditProfil} />
-    <Right onCardAdd={onCardAdd} />
+    <BlockLeft src={avatar} onClick={onChangeAvatar} />
+    <BlockCenter title={title} text={text} onEditProfil={onEditProfil} />
+    <BlockRight onCardAdd={onCardAdd} />
   </section>
 );

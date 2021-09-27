@@ -9,19 +9,19 @@ import { Button } from '../Button';
 import './styles.css';
 
 export const Form = ({ data: { title, fileds, button }, onSubmit }) => {
-  const [filedsValue, setFiledsValue] = useState({})
+  const [filedsValue, setFiledsValue] = useState({});
 
   const handlerOnChange = (e) => {
     setFiledsValue({
       ...filedsValue,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handlerSubmit = (e) => {
-    e.preventDefault()
-    onSubmit(filedsValue)
-  }
+    e.preventDefault();
+    onSubmit(filedsValue);
+  };
 
   return (
     <form className="form" onSubmit={handlerSubmit}>
@@ -32,7 +32,9 @@ export const Form = ({ data: { title, fileds, button }, onSubmit }) => {
           <ErrorMsg />
         </Label>
       ))}
-      <Button>{button}</Button>
+      <Button type="submit" styles="btn-form">
+        {button}
+      </Button>
     </form>
   );
 };

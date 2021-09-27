@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import "./styles.css";
+import './styles.css';
 
-export const Caption = ({ text }) => (
-  <p className="preview__caption">{text}</p>
+export const Caption = ({ children }) => (
+  <p className="preview__caption">{children}</p>
 );

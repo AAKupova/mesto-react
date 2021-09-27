@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import './styles.css'
+import './styles.css';
 
 export const Header = ({ children }) => (
-  <header className="header">
-    {children}
-  </header>
+  <header className="header">{children}</header>
 );

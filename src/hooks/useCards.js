@@ -1,4 +1,4 @@
-import { api } from "../utils/api";
+import { api } from '../utils/api';
 
 export const useCards = () => {
   const handlerDelete = (id) => {
@@ -15,9 +15,12 @@ export const useCards = () => {
 
   const getCards = () => api.getCards();
 
+  const createCard = (data) => api.createCard(data);
+
   return {
     getCards,
     handlerDelete,
     handlerLike,
+    createCard,
   };
 };
