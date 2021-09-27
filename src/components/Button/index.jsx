@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import "./styles.css";
+import './styles.css';
 
-export const Button = ({ children, onClick }) => (
-  <button type="submit" className="form__button-submit" onClick={onClick}>
+export const Button = ({ children, onClick, type, styles }) => (
+  <button type={type} className={styles} onClick={onClick}>
     {children}
   </button>
 );

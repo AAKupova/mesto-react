@@ -33,7 +33,7 @@ export const dataEditProfil = {
       minLength: '2',
       maxLength: '200',
       type: 'text',
-      name: 'job',
+      name: 'about',
       placeholder: 'Описание',
     },
   ],

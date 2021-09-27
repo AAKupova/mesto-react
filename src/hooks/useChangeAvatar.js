@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 
-export const useChangeAvatar = () => {
+export const useChangeAvatar = ({ handlerChangePhoto }) => {
   const [showChangeAvatar, setShowChangeAvatar] = useState(false);
 
+  const close = (e) => {
+    if (e.keyCode === 27) {
+      setShowChangeAvatar(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, []);
+
+
   const handlerToggleChange = () => {
-    setShowChangeAvatar(!showChangeAvatar)
+    setShowChangeAvatar(!showChangeAvatar);
   };
 
   const handlerChangeSubmit = (data) => {
-    console.log(data)
-    setShowChangeAvatar(!showChangeAvatar)
-  }
+    setShowChangeAvatar(!showChangeAvatar);
+    handlerChangePhoto(data);
+  };
 
   return {
     showChangeAvatar,

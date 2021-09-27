@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-
-import { useCards } from "./useCards";
-import { useUser } from "./useUser";
+import { useState, useEffect } from 'react';
+import { useCards } from './useCards';
+import { useUser } from './useUser';
 
 export const useNormalizeData = () => {
   const [user, setUser] = useState({});
   const [cards, setCards] = useState([]);
-  const { getCards, handlerDelete, handlerLike } = useCards();
-  const { getUsers } = useUser();
+  const { getCards, handlerDelete, handlerLike, createCard } = useCards();
+  const { getUsers, rewriteUserInfo, changePhoto } = useUser();
 
   const normalizeCards = (user, cards) =>
     cards.map((card) => ({
@@ -15,8 +14,8 @@ export const useNormalizeData = () => {
       title: card.name,
       img: card.link,
       likesCount: card.likes.length,
-      isMy: user._id === card.owner._id,
-      isMyLike: card.likes.some((like) => like._id === user._id),
+      isMy: user.id === card.owner._id,
+      isMyLike: card.likes.some((like) => like._id === user.id),
     }));
 
   const normalizeUser = (user) => ({
@@ -28,10 +27,8 @@ export const useNormalizeData = () => {
 
   useEffect(() => {
     Promise.all([getUsers(), getCards()]).then((data) => {
-      const [user, cards] = data;
-
-      setCards(normalizeCards(user, cards));
-      setUser(normalizeUser(user));
+      setUser(normalizeUser(data[0]));
+      setCards(normalizeCards(user, data[1]));
     });
   }, []);
 
@@ -62,10 +59,25 @@ export const useNormalizeData = () => {
     );
   };
 
+  const handlerAddCard = (data) => {
+    createCard(data).then((res) => setCards([...normalizeCards(user, [res]), ...cards]));
+  };
+
+  const handlerEdit = (data) => {
+    rewriteUserInfo(data).then((res) => setUser(normalizeUser(res)));
+  };
+
+  const handlerChangePhoto = (data) => {
+    changePhoto(data).then((res) => setUser(normalizeUser(res)));
+  };
+
   return {
     user,
     cards,
     handlerCardDelete,
     handlerCardLike,
+    handlerAddCard,
+    handlerEdit,
+    handlerChangePhoto,
   };
 };
