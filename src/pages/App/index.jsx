@@ -12,7 +12,7 @@ import { Preview } from '../../components/Preview';
 import { Form } from '../../components/Form';
 import { PopupConfirm } from '../../components/PopupConfirm';
 
-import { useNormalizeData } from '../../hooks/useNormalizeData';
+import { useApi } from '../../hooks/useApi';
 import { usePreviewPopup } from '../../hooks/usePreviewPopup';
 import { useAddPopup } from '../../hooks/useAddPopup';
 import { useEditProfil } from '../../hooks/useEditProfil';
@@ -27,12 +27,32 @@ import { dataConfirm } from '../../utils/constants';
 import './styles.css';
 
 export const App = () => {
-  const { cards, user, handlerCardDelete, handlerCardLike, handlerAddCard, handlerEdit, handlerChangePhoto } = useNormalizeData();
-  const { previewData, handlerTogglePreview } = usePreviewPopup();
-  const { showPopupAdd, handlerTogglePopupAdd, handlerSubmit } = useAddPopup({ handlerAddCard });
-  const { showEditProfil, handlerToggleEditProfil, handlerEditSubmit } = useEditProfil({ handlerEdit });
-  const { showChangeAvatar, handlerToggleChange, handlerChangeSubmit } = useChangeAvatar({ handlerChangePhoto });
-  const { showConfirm, handlerToggleConfirm, handlerConfirmSubmit } = useConfirm({ handlerCardDelete });
+  const {
+    cards,
+    user,
+    handlerCardDelete,
+    handlerCardLike,
+    handlerAddCard,
+    handlerEdit,
+    handlerChangePhoto,
+  } = useApi();
+  const { previewData, handlerOpenPreview, handlerClosePreview } = usePreviewPopup();
+  const { showPopupAdd, handlerOpenPopupAdd, handlerClosePopupAdd, handlerSubmit } = useAddPopup({
+    handlerAddCard,
+  });
+  const { showEditProfil, handlerOpenEditProfil, handlerCloseEditProfil, handlerEditSubmit } =
+    useEditProfil({
+      handlerEdit,
+    });
+  const { showChangeAvatar, handlerOpenChange, handlerCloseChange, handlerChangeSubmit } =
+    useChangeAvatar({
+      handlerChangePhoto,
+    });
+  const { showConfirm, handlerOpenConfirm, handlerCloseConfirm, handlerConfirmSubmit } = useConfirm(
+    {
+      handlerCardDelete,
+    }
+  );
 
   return (
     <div className="page">
@@ -44,9 +64,9 @@ export const App = () => {
           avatar={user.avatar}
           title={user.name}
           text={user.about}
-          onCardAdd={handlerTogglePopupAdd}
-          onEditProfil={handlerToggleEditProfil}
-          onChangeAvatar={handlerToggleChange}
+          onCardAdd={handlerOpenPopupAdd}
+          onEditProfil={handlerOpenEditProfil}
+          onChangeAvatar={handlerOpenChange}
         />
         <Cards>
           {cards.map((card) => (
@@ -60,26 +80,33 @@ export const App = () => {
               isMyLike={card.isMyLike}
               onDelete={handlerCardDelete}
               onLike={handlerCardLike}
-              onConfirm={handlerToggleConfirm}
-              onOpenPopup={handlerTogglePreview}
+              onConfirm={handlerOpenConfirm}
+              onOpenPopup={handlerOpenPreview}
             />
           ))}
         </Cards>
       </Main>
       <Footer />
-      <Popup show={previewData.src} onclose={handlerTogglePreview}>
+
+      <Popup show={previewData.src} onClose={handlerClosePreview}>
         <Preview src={previewData.src} alt={previewData.alt} />
       </Popup>
-      <Popup show={showPopupAdd} onclose={handlerTogglePopupAdd}>
-        <Form data={dataAddCard} onSubmit={handlerSubmit} />
+
+      <Popup show={showPopupAdd} onClose={handlerClosePopupAdd}>
+        <Form data={dataAddCard} onSubmit={handlerSubmit} show={showPopupAdd} />
       </Popup>
-      <Popup show={showEditProfil} onclose={handlerToggleEditProfil}>
-        <Form data={dataEditProfil} onSubmit={handlerEditSubmit} />
-      </Popup>
-      <Popup show={showChangeAvatar} onclose={handlerToggleChange}>
+
+      {user.name ? (
+        <Popup show={showEditProfil} onClose={handlerCloseEditProfil}>
+          <Form data={dataEditProfil} onSubmit={handlerEditSubmit} initialValue={user} show={showEditProfil} />
+        </Popup>
+      ) : null}
+
+      <Popup show={showChangeAvatar} onClose={handlerCloseChange}>
         <Form data={dataChangeAvatar} onSubmit={handlerChangeSubmit} />
       </Popup>
-      <Popup show={showConfirm} onclose={handlerToggleConfirm}>
+
+      <Popup show={showConfirm} onClose={handlerCloseConfirm}>
         <PopupConfirm data={dataConfirm} onClick={handlerConfirmSubmit} />
       </Popup>
     </div>

@@ -7,7 +7,7 @@ import './styles.css';
 
 export const PopupConfirm = ({ data, onClick }) => (
   <div className="confirm">
-    <Title>{data.title}</Title>
-    <Button type="button" styles="btn-form" onClick={onClick}>{data.button}</Button>
+    <Title className="confirm__title">{data.title}</Title>
+    <Button type="button" className="button_type_primary" onClick={onClick}>{data.button}</Button>
   </div>
 );

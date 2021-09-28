@@ -1,31 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const useEditProfil = ({ handlerEdit }) => {
   const [showEditProfil, setShowEditProfil] = useState(false);
 
-  const close = (e) => {
-    if (e.keyCode === 27) {
-      setShowEditProfil(false);
-    }
+  const handlerOpenEditProfil = () => {
+    setShowEditProfil(true);
   };
 
-  useEffect(() => {
-    document.addEventListener('keydown', close);
-    return () => document.removeEventListener('keydown', close);
-  }, []);
-
-  const handlerToggleEditProfil = () => {
-    setShowEditProfil(!showEditProfil);
+  const handlerCloseEditProfil = () => {
+    setShowEditProfil(false);
   };
 
   const handlerEditSubmit = (data) => {
     handlerEdit(data);
-    setShowEditProfil(!showEditProfil);
+    handlerCloseEditProfil();
   };
 
   return {
     showEditProfil,
-    handlerToggleEditProfil,
+    handlerOpenEditProfil,
+    handlerCloseEditProfil,
     handlerEditSubmit,
   };
 };
