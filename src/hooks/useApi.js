@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useCards } from './useCards';
-import { useUser } from './useUser';
+import { api } from '../utils/api';
 
-export const useNormalizeData = () => {
+export const useApi = () => {
   const [user, setUser] = useState({});
   const [cards, setCards] = useState([]);
-  const { getCards, handlerDelete, handlerLike, createCard } = useCards();
-  const { getUsers, rewriteUserInfo, changePhoto } = useUser();
 
   const normalizeCards = (user, cards) =>
     cards.map((card) => ({
@@ -26,14 +23,15 @@ export const useNormalizeData = () => {
   });
 
   useEffect(() => {
-    Promise.all([getUsers(), getCards()]).then((data) => {
-      setUser(normalizeUser(data[0]));
-      setCards(normalizeCards(user, data[1]));
+    Promise.all([api.getUser(), api.getCards()]).then((data) => {
+      const normalizedUser = normalizeUser(data[0]);
+      setUser(normalizedUser);
+      setCards(normalizeCards(normalizedUser, data[1]));
     });
   }, []);
 
   const handlerCardDelete = (id) => {
-    handlerDelete(id);
+    api.deleteCard(id);
     setCards(cards.filter((card) => card.id !== id));
   };
 
@@ -41,15 +39,17 @@ export const useNormalizeData = () => {
     setCards(
       cards.map((card) => {
         if (card.id === id) {
-          handlerLike(id, card.isMyLike);
-
           if (card.isMyLike) {
+            api.disLike(id);
+
             return {
               ...card,
               isMyLike: false,
               likesCount: card.likesCount - 1,
             };
           } else {
+            api.like(id);
+
             return { ...card, isMyLike: true, likesCount: card.likesCount + 1 };
           }
         }
@@ -60,15 +60,15 @@ export const useNormalizeData = () => {
   };
 
   const handlerAddCard = (data) => {
-    createCard(data).then((res) => setCards([...normalizeCards(user, [res]), ...cards]));
+    api.createCard(data).then((res) => setCards([...normalizeCards(user, [res]), ...cards]));
   };
 
   const handlerEdit = (data) => {
-    rewriteUserInfo(data).then((res) => setUser(normalizeUser(res)));
+    api.rewriteUserInfo(data).then((res) => setUser(normalizeUser(res)));
   };
 
   const handlerChangePhoto = (data) => {
-    changePhoto(data).then((res) => setUser(normalizeUser(res)));
+    api.updatePhoto(data).then((res) => setUser(normalizeUser(res)));
   };
 
   return {

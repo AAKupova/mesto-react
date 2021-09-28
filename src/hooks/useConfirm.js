@@ -1,33 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const useConfirm = ({ handlerCardDelete }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [idCard, setIdCard] = useState(0);
 
-  const close = (e) => {
-    if (e.keyCode === 27) {
-      setShowConfirm(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', close);
-    return () => document.removeEventListener('keydown', close);
-  }, []);
-
-  const handlerToggleConfirm = (id) => {
-    setShowConfirm(!showConfirm);
+  const handlerOpenConfirm = (id) => {
+    setShowConfirm(true);
     setIdCard(id);
+  };
+  const handlerCloseConfirm = () => {
+    setShowConfirm(false);
   };
 
   const handlerConfirmSubmit = () => {
-    setShowConfirm(!showConfirm);
+    handlerCloseConfirm()
     handlerCardDelete(idCard);
   };
 
   return {
     showConfirm,
-    handlerToggleConfirm,
+    handlerOpenConfirm,
+    handlerCloseConfirm,
     handlerConfirmSubmit,
   };
 };

@@ -3,12 +3,17 @@ import { useState } from "react";
 export const usePreviewPopup = () => {
   const [previewData, setPreviewData] = useState({});
 
-  const handlerTogglePreview = (data) => {
+  const handlerOpenPreview = (data = {}) => {
     previewData.src ? setPreviewData({}) : setPreviewData(data);
+  };
+
+  const handlerClosePreview = (data = {}) => {
+    setPreviewData({})
   };
 
   return {
     previewData,
-    handlerTogglePreview,
+    handlerOpenPreview,
+    handlerClosePreview,
   };
 };

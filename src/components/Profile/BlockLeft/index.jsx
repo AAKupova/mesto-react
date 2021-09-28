@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { Avatar } from '../Avatar';
-
 import './styles.css';
 
-export const BlockLeft = ({ src, onClick }) => (
+export const BlockLeft = ({ children, onClick }) => (
   <div className="profile__left" onClick={onClick}>
-    <Avatar src={src} />
+    {children}
   </div>
 );

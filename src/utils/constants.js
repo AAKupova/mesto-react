@@ -1,7 +1,7 @@
 export const dataAddCard = {
   title: 'Новое место',
   button: 'Создать',
-  fileds: [
+  fields: [
     {
       minLength: '2',
       maxLength: '30',
@@ -21,7 +21,7 @@ export const dataAddCard = {
 export const dataEditProfil = {
   title: 'Редактировать профиль',
   button: 'Сохранить',
-  fileds: [
+  fields: [
     {
       minLength: '2',
       maxLength: '40',
@@ -42,7 +42,7 @@ export const dataEditProfil = {
 export const dataChangeAvatar = {
   title: 'Обновить аватар',
   button: 'Сохранить',
-  fileds: [
+  fields: [
     {
       pattern: 'https://.*',
       type: 'url',

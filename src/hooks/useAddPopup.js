@@ -1,30 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const useAddPopup = ({ handlerAddCard }) => {
   const [showPopupAdd, setShowPopupAdd] = useState(false);
-  const handlerTogglePopupAdd = () => {
-    setShowPopupAdd(!showPopupAdd);
-  };
 
-  const close = (e) => {
-    if (e.keyCode === 27) {
-      setShowPopupAdd(false);
-    }
+  const handlerOpenPopupAdd = () => {
+    setShowPopupAdd(true);
   };
-
-  useEffect(() => {
-    document.addEventListener('keydown', close);
-    return () => document.removeEventListener('keydown', close);
-  }, []);
+  
+  const handlerClosePopupAdd = () => {
+    setShowPopupAdd(false);
+  };
 
   const handlerSubmit = (data) => {
-    setShowPopupAdd(!showPopupAdd);
-    handlerAddCard(data)
+    handlerClosePopupAdd();
+    handlerAddCard(data);
   };
 
   return {
     showPopupAdd,
-    handlerTogglePopupAdd,
+    handlerOpenPopupAdd,
+    handlerClosePopupAdd,
     handlerSubmit,
   };
 };
