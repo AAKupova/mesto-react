@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { Header } from '../../components/Header';
 import { Logo } from '../../components/Logo';
@@ -26,6 +25,14 @@ import { dataChangeAvatar } from '../../utils/constants';
 import { dataConfirm } from '../../utils/constants';
 
 import './styles.css';
+
+
+const device = {
+  tablet: 'screen and (min-width: 625px)',
+  iPads: 'screen and (min-width: 768px)',
+  laptops: 'screen and (min-width: 920px)',
+  desktop: 'screen and (min-width: 1024px)',
+}
 
 export const App = () => {
   const {
@@ -55,15 +62,9 @@ export const App = () => {
     }
   );
 
-  const Test = styled.div`
-  background: red;
-    width: 100px;
-    height: 100px;
-  `
-
   return (
     <div className="page">
-      <Header>
+      <Header device={device}>
         <Logo />
       </Header>
       <Main>
@@ -116,8 +117,6 @@ export const App = () => {
       <Popup show={showConfirm} onClose={handlerCloseConfirm}>
         <PopupConfirm data={dataConfirm} onClick={handlerConfirmSubmit} />
       </Popup>
-
-      <Test>Hello</Test>
     </div>
   );
 };
