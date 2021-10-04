@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Header } from '../../components/Header';
 import { Logo } from '../../components/Logo';
@@ -53,6 +54,12 @@ export const App = () => {
       handlerCardDelete,
     }
   );
+
+  const Test = styled.div`
+  background: red;
+    width: 100px;
+    height: 100px;
+  `
 
   return (
     <div className="page">
@@ -109,6 +116,8 @@ export const App = () => {
       <Popup show={showConfirm} onClose={handlerCloseConfirm}>
         <PopupConfirm data={dataConfirm} onClick={handlerConfirmSubmit} />
       </Popup>
+
+      <Test>Hello</Test>
     </div>
   );
 };
