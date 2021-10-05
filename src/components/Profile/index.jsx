@@ -5,12 +5,12 @@ import { BlockRight } from './BlockRight';
 import { BlockCenter } from './BlockCenter';
 import { Button } from './Button';
 import { Title } from './Title';
-import { Text } from './Text';
+import { Text } from '../Text';
 import { Avatar } from './Avatar';
 
 import './styles.css';
 
-export const Profile = ({ avatar, text, title, onCardAdd, onEditProfil, onChangeAvatar }) => (
+export const Profile = ({ avatar, text, title, onCardAdd, onEditProfil, onChangeAvatar, device }) => (
   <section className="profile">
     <BlockLeft onClick={onChangeAvatar}>
       <Avatar src={avatar} />
@@ -19,7 +19,7 @@ export const Profile = ({ avatar, text, title, onCardAdd, onEditProfil, onChange
     <BlockCenter>
       <Title>{title}</Title>
       <Button onClick={onEditProfil} type="edit" />
-      <Text>{text}</Text>
+      <Text device={device} color='#fff'>{text}</Text>
     </BlockCenter>
 
     <BlockRight>

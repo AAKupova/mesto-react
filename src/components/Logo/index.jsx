@@ -13,7 +13,7 @@ const StyledLogo = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
 
-  @media ${(props) => props.device.device.iPads} {
+  @media ${(props) => props.device.iPads} {
     width: 142px;
     height: 33px;
   }
