@@ -72,10 +72,10 @@ export const App = () => {
         <Header device={theme}>
         <FlexContainer >
           <Logo device={theme}/>
-          <FlexContainer gap='0 24px'>
+          {/* <FlexContainer gap='0 24px'>
             <p>aa.kupova@gmail.com</p>
             <button>Выйти</button>
-          </FlexContainer >
+          </FlexContainer > */}
         </FlexContainer >
         </Header>
       <Main>
@@ -105,7 +105,7 @@ export const App = () => {
           ))}
         </Cards>
       </Main>
-      <Footer />
+      <Footer device={theme} />
 
       <Popup show={previewData.src} onClose={handlerClosePreview}>
         <Preview src={previewData.src} alt={previewData.alt} />
