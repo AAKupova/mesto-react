@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import { Header } from '../../components/Header';
 import { Logo } from '../../components/Logo';
@@ -11,6 +12,7 @@ import { Popup } from '../../components/Popup';
 import { Preview } from '../../components/Preview';
 import { Form } from '../../components/Form';
 import { PopupConfirm } from '../../components/PopupConfirm';
+import { FlexContainer } from '../../components/FlexContainer';
 
 import { useApi } from '../../hooks/useApi';
 import { usePreviewPopup } from '../../hooks/usePreviewPopup';
@@ -27,11 +29,13 @@ import { dataConfirm } from '../../utils/constants';
 import './styles.css';
 
 
-const device = {
-  tablet: 'screen and (min-width: 625px)',
-  iPads: 'screen and (min-width: 768px)',
-  laptops: 'screen and (min-width: 920px)',
-  desktop: 'screen and (min-width: 1024px)',
+const theme = {
+  device: {
+    tablet: 'screen and (min-width: 625px)',
+    iPads: 'screen and (min-width: 768px)',
+    laptops: 'screen and (min-width: 920px)',
+    desktop: 'screen and (min-width: 1024px)',
+  }
 }
 
 export const App = () => {
@@ -63,10 +67,17 @@ export const App = () => {
   );
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="page">
-      <Header device={device}>
-        <Logo />
-      </Header>
+        <Header device={theme}>
+        <FlexContainer >
+          <Logo device={theme}/>
+          <FlexContainer gap='0 24px'>
+            <p>aa.kupova@gmail.com</p>
+            <button>Выйти</button>
+          </FlexContainer >
+        </FlexContainer >
+        </Header>
       <Main>
         <Profile
           avatar={user.avatar}
@@ -118,5 +129,6 @@ export const App = () => {
         <PopupConfirm data={dataConfirm} onClick={handlerConfirmSubmit} />
       </Popup>
     </div>
+    </ThemeProvider>
   );
 };
