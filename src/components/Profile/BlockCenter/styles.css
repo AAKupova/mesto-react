@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto 30px;
-  max-width: 282px;
+  max-width: 260px;
 }
 
 @media screen and (min-width: 625px) {
@@ -11,7 +11,6 @@
     justify-content: start;
     align-self: center;
     margin: 0 0 0 30px;
-    max-width: 282px;
   }
 }
 

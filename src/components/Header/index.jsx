@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Header = (props) => (<StyledHeader {...props} />);
+export const Header = (props) => (<StyledHeader {...props}>{props.children}</StyledHeader>);
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -9,11 +9,11 @@ const StyledHeader = styled.header`
   box-sizing: border-box;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 
-  @media ${(props) => props.device.device.tablet} {
+  @media ${(props) => props.device.tablet} {
     padding: 45px 0 41px 27px;
   }
 
-  @media ${(props) => props.device.device.desktop} {
+  @media ${(props) => props.device.desktop} {
     padding: 45px 0 41px 0;
   }
 `;

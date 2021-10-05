@@ -29,13 +29,11 @@ import { dataConfirm } from '../../utils/constants';
 import './styles.css';
 
 
-const theme = {
-  device: {
-    tablet: 'screen and (min-width: 625px)',
-    iPads: 'screen and (min-width: 768px)',
-    laptops: 'screen and (min-width: 920px)',
-    desktop: 'screen and (min-width: 1024px)',
-  }
+const device = {
+  tablet: 'screen and (min-width: 625px)',
+  iPads: 'screen and (min-width: 768px)',
+  laptops: 'screen and (min-width: 920px)',
+  desktop: 'screen and (min-width: 1024px)',
 }
 
 export const App = () => {
@@ -67,11 +65,11 @@ export const App = () => {
   );
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={device}>
     <div className="page">
-        <Header device={theme}>
+        <Header device={device}>
         <FlexContainer >
-          <Logo device={theme}/>
+          <Logo device={device}/>
           {/* <FlexContainer gap='0 24px'>
             <p>aa.kupova@gmail.com</p>
             <button>Выйти</button>
@@ -80,6 +78,7 @@ export const App = () => {
         </Header>
       <Main>
         <Profile
+          device={device}
           avatar={user.avatar}
           title={user.name}
           text={user.about}
@@ -105,7 +104,7 @@ export const App = () => {
           ))}
         </Cards>
       </Main>
-      <Footer device={theme} />
+      <Footer device={device} />
 
       <Popup show={previewData.src} onClose={handlerClosePreview}>
         <Preview src={previewData.src} alt={previewData.alt} />
